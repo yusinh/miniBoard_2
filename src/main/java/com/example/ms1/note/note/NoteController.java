@@ -1,5 +1,6 @@
 package com.example.ms1.note.note;
 
+import com.example.ms1.note.MainDataDto;
 import com.example.ms1.note.MainService;
 import com.example.ms1.note.notebook.Notebook;
 import com.example.ms1.note.notebook.NotebookRepository;
@@ -17,30 +18,20 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/books/{notebookId}/notes")
 public class NoteController {
-
     private final NoteService noteService;
     private final MainService mainService;
 
     @PostMapping("/write")
     public String write(@PathVariable("notebookId") Long notebookId) {
-        Notebook notebook = mainService.getNotebook(notebookId);
-        noteService.saveDefault(notebook);
-        return "redirect:/";
+        Notebook notebook = mainService.addNotebook(notebookId);
+        return "redirect:/books/" + notebookId + "/notes/" + notebook.getNoteList().get(0).getId();
     }
 
     @GetMapping("/{id}")
     public String detail(Model model, @PathVariable("notebookId") Long notebookId, @PathVariable("id") Long id) {
-        Note note = noteService.getNote(id);
+        MainDataDto mainDataDto = mainService.mainDataDto(notebookId, id);
 
-        List<Notebook> notebookList = mainService.getNotebookList();
-        Notebook targetNotebook = mainService.getNotebook(notebookId);
-        List<Note> noteList = noteService.getNoteListByNotebook(targetNotebook);
-
-        model.addAttribute("notebookList", notebookList);
-        model.addAttribute("targetNotebook", targetNotebook);
-        model.addAttribute("targetNote", note);
-        model.addAttribute("noteList", noteList);
-
+        model.addAttribute("mainDataDto", mainDataDto);
         return "main";
     }
     @PostMapping("/{id}/update")
@@ -60,10 +51,8 @@ public class NoteController {
 
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable("notebookId") Long notebookId, @PathVariable("id") Long id) {
-
-        noteService.delete(id);
+        Note note = noteService.getNote(id);
+        noteService.delete(note);
         return "redirect:/";
     }
-
-
 }

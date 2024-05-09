@@ -12,15 +12,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class NotebookController {
-
-
     private final NotebookService notebookService;
     private final MainService mainService;
 
     @PostMapping("/books/write")
     public String write() {
-        mainService.saveDefault();
+        mainService.saveDefaultNotebook();
         return "redirect:/";
+    }
+
+    @PostMapping("/groups/{notebookId}/books/write")
+    public String groupWrite(@PathVariable("notebookId") Long notebookId) {
+        mainService.saveGroupNotebook(notebookId);
+
+        return "redirect:/books/" + notebookId;
     }
 
     @GetMapping("/books/{id}")
