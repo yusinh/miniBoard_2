@@ -12,7 +12,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NoteService {
     private final NoteRepository noteRepository;
-    private final NotebookService notebookService;
 
     public Note saveDefault(Notebook notebook) {
         Note note = new Note();
@@ -38,13 +37,5 @@ public class NoteService {
 
     public void delete(Long id) {
         noteRepository.deleteById(id);
-    }
-
-    public Notebook getNotebook(Long notebookId) {
-        return notebookService.getNotebook(notebookId);
-    }
-
-    public List<Notebook> getNotebookList() {
-        return notebookService.getNotebookList();
     }
 }
