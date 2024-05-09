@@ -1,6 +1,5 @@
 package com.example.ms1.note.notebook;
 
-import com.example.ms1.note.note.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

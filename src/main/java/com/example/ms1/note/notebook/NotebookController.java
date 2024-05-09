@@ -2,7 +2,6 @@ package com.example.ms1.note.notebook;
 
 import com.example.ms1.note.MainService;
 import com.example.ms1.note.note.Note;
-import com.example.ms1.note.note.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,12 +1,9 @@
 package com.example.ms1.note.note;
 
-import com.example.ms1.note.notebook.Notebook;
-import com.example.ms1.note.notebook.NotebookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

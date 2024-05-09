@@ -1,16 +1,9 @@
 package com.example.ms1.note;
 
-import com.example.ms1.note.note.Note;
-import com.example.ms1.note.note.NoteRepository;
-import com.example.ms1.note.note.NoteService;
-import com.example.ms1.note.notebook.Notebook;
-import com.example.ms1.note.notebook.NotebookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
