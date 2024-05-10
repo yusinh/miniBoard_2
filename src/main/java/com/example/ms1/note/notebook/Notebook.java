@@ -37,4 +37,3 @@ public class Notebook {
         noteList.add(note);
     }
 }
-

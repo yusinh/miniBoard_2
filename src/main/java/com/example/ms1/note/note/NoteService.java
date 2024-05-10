@@ -1,16 +1,18 @@
 package com.example.ms1.note.note;
 
+import com.example.ms1.note.notebook.Notebook;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class NoteService {
     private final NoteRepository noteRepository;
 
-    public Note saveDefaultNote() {
+    public Note saveDefault() {
         Note note = new Note();
         note.setTitle("new title..");
         note.setContent("");
@@ -19,16 +21,20 @@ public class NoteService {
         return noteRepository.save(note);
     }
 
-    public Note getNote(long id){
-        Note note = noteRepository.findById(id).get();
-        return note;
+    public Note getNote(Long id) {
+        return noteRepository.findById(id).orElseThrow();
+    }
+
+    public List<Note> getNoteListByNotebook(Notebook targetNotebook) {
+        return noteRepository.findByNotebook(targetNotebook);
     }
 
     public void save(Note note) {
         noteRepository.save(note);
     }
 
-    public void delete(Note note) {
-        noteRepository.delete(note);
+    public void delete(Long id) {
+        noteRepository.deleteById(id);
     }
+
 }

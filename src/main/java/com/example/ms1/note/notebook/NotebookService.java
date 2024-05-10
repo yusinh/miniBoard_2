@@ -9,17 +9,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NotebookService {
     private final NotebookRepository notebookRepository;
-    public List<Notebook> getNotebookList(){
-        List<Notebook> notebookList = notebookRepository.findAll();
-        return notebookList;
+
+    public Notebook getNotebook(Long notebookId) {
+        return notebookRepository.findById(notebookId).orElseThrow();
     }
 
-    public Notebook getNotebook(long id){
-        Notebook notebook = notebookRepository.findById(id).get();
-        return notebook;
+    public List<Notebook> getNotebookList() {
+        return notebookRepository.findAll();
     }
 
     public Notebook save(Notebook notebook) {
         return notebookRepository.save(notebook);
+    }
+
+    public void delete(Long id) {
+        notebookRepository.deleteById(id);
     }
 }

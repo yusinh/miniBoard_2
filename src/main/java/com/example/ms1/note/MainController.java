@@ -12,7 +12,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String main(Model model) {
-        MainDataDto mainDataDto = mainService.defaultMainDataDto();
+        MainDataDto mainDataDto = mainService.getDefaultMainData();
         model.addAttribute("mainDataDto", mainDataDto);
         return "main";
     }

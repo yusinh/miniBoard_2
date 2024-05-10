@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,9 +9,9 @@
 <body>
 <div class="bg-yellow-400"
      th:with="notebookList=${mainDataDto.notebookList},
-         targetNotebook=${mainDataDto.targetNotebook},
-         noteList=${mainDataDto.noteList},
-         targetNote=${mainDataDto.targetNote}">
+        noteList=${mainDataDto.noteList},
+        targetNotebook=${mainDataDto.targetNotebook},
+        targetNote=${mainDataDto.targetNote}">
     <div class="bg-blue-300">
         <a href="/">logo</a>
     </div>
@@ -42,11 +42,16 @@
                     </th:block>
                 </li>
             </ul>
+
             <form th:action="@{|/books/write|}" method="post">
                 <input type="submit" value="추가">
             </form>
+
             <form th:action="@{|/groups/${targetNotebook.id}/books/write|}" method="post">
                 <input type="submit" value="하위 노트북 추가">
+            </form>
+            <form th:action="@{|/books/${targetNotebook.id}/delete|}" method="post">
+                <input type="submit" value="삭제">
             </form>
         </div>
         <div class="bg-red-300 w-[20%] h-[800px] text-center ">
@@ -55,6 +60,7 @@
                     <a th:href="@{|/books/${targetNotebook.id}/notes/${note.id}|}" th:text="${note.title}"></a>
                 </li>
             </ul>
+
             <form th:action="@{|/books/${targetNotebook.id}/notes/write|}" method="post">
                 <input type="submit" value="추가">
             </form>
