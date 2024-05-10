@@ -48,8 +48,7 @@ public class NoteController {
 
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable("notebookId") Long notebookId, @PathVariable("id") Long id) {
-        Note note = noteService.getNote(id);
-        noteService.delete(note);
+        noteService.delete(id);
         return "redirect:/";
     }
 }
