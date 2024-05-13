@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -19,7 +21,15 @@ public class SecurityConfig {
                 )
                 .formLogin(formLogin ->
                         formLogin.loginPage("/login")
+                                .defaultSuccessUrl("/")
                 );
         return http.build();
     }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    // 스프링 시큐리티에서 password가 암호화되지 않았을 경우 인증처리를 하지 않는다.
+
 }
