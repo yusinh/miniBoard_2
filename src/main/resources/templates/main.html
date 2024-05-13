@@ -88,6 +88,7 @@
                 <div>
                     <input type="text" name="title" th:value="${targetNote.title}">
                 </div>
+                <input type="hidden" name="content" id="editor-body">
                 <div id="editor"></div>
                 <div>
                     <input type="button" value="수정" onclick="updateForm()">
@@ -113,8 +114,11 @@
     <script>
         function updateForm() {
             const form = document.getElementById("updateForm");
+            const editorBody = document.getElementById("editor-body");
             if (confirm("수정하시겠습니까?")) {
-                form.submit();
+            const text = editor.getMarkdown();
+            editorBody.value = text;
+            form.submit();
             }
         }
 
