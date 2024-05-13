@@ -9,15 +9,11 @@
                                          th:href="@{|/books/${notebook.id}|}"
                                          th:text="${notebook.name}"></a></summary>
             <ul>
-                <li th:each="child : ${notebook.children}">
-                    <a th:class="${basic}"
-                       th:classappend="${child.id == targetNotebook.id} ? 'bg-blue-600' : '' "
-                       th:href="@{|/books/${child.id}|}" th:text="${child.name}"></a>
-                </li>
+                <li th:replace="main::noteTree(${notebook.children}, ${targetNotebook})"></li>
             </ul>
         </details>
     </th:block>
-    <th:block th:if="${#lists.isEmpty(notebook.children) and notebook.parent == null}">
+    <th:block th:if="${#lists.isEmpty(notebook.children)}">
         <a th:class="${basic}"
            th:classappend="${notebook.id == targetNotebook.id} ? 'bg-blue-600' : '' "
            th:href="@{|/books/${notebook.id}|}" th:text="${notebook.name}"></a>

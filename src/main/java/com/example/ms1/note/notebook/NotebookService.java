@@ -31,4 +31,8 @@ public class NotebookService {
         notebook.setName(name);
         return notebookRepository.save(notebook);
     }
+
+    public List<Notebook> getTopNotebookList() {
+        return notebookRepository.findByParentIsNull();
+    }
 }
