@@ -1,5 +1,5 @@
 <html lang="en" layout:decorate="~{layout}">
-<div layout:fragment="content" class="w-[800px] mx-auto">
+<div layout:fragment="content" class="w-[800px] mx-auto flex flex-col gap-7">
     <form th:action="@{/login}" class="flex flex-col gap-7" method="post">
         <!-- 스프링 시큐리티를 적용하면 POST 요청을 할 때 무조건 CSRF 라는 토큰을 같이 넘겨야 한다.
          그렇지 않으면 처리되지 않는다. -> 타임리프가 만들어줌.(action 에 th 를 붙이면 알아서 타임리프가 토큰을 만들어서 보내줌)-->
@@ -8,6 +8,7 @@
         <input type="password" name="password" class="input" placeholder="비밀번호">
         <input type="submit" class="btn" value="로그인" >
     </form>
+    <a href="/signup" class="btn">회원 가입</a>
 </div>
 </html>
 
