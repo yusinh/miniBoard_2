@@ -24,13 +24,15 @@ public class SecurityConfig {
                         formLogin.loginPage("/login")
                                 .defaultSuccessUrl("/")
                 )
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/login"))
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .invalidateHttpSession(true)
                         .logoutSuccessUrl("/login")
                 )
                 .oauth2Login(oauth2 ->
-                        oauth2.loginPage("login")
+                        oauth2.loginPage("/login")
                 );
         return http.build();
     }
