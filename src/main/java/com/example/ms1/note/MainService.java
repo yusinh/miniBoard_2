@@ -6,6 +6,7 @@ import com.example.ms1.note.notebook.Notebook;
 import com.example.ms1.note.notebook.NotebookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class MainService {
     private final NotebookService notebookService;
     private final NoteService noteService;
 
-    public MainDataDto getDefaultMainData(String keyword) {
+    public MainDataDto getDefaultMainData(@RequestParam(defaultValue = "")String keyword) {
         List<Notebook> notebookList = notebookService.getTopNotebookList();
 
         if (notebookList.isEmpty()) {
