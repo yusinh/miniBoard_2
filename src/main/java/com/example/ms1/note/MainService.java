@@ -17,7 +17,7 @@ public class MainService {
     private final NotebookService notebookService;
     private final NoteService noteService;
 
-    public MainDataDto getDefaultMainData(@RequestParam(defaultValue = "")String keyword) {
+    public MainDataDto getDefaultMainData(String keyword) {
         List<Notebook> notebookList = notebookService.getTopNotebookList();
 
         if (notebookList.isEmpty()) {

@@ -54,6 +54,7 @@
         searchedNotebookList=${mainDataDto.searchedNotebookList},
         searchedNoteList=${mainDataDto.searchedNoteList}
 ">
+    <input type="hidden" id="isSearchModal" th:value="${isSearchModal}">
     <div class="bg-blue-300">
         <a href="/">logo</a>
     </div>
@@ -105,6 +106,7 @@
                     <div class="h-[15%]">
                         <form action="/" class="flex justify-center gap-5">
                             <input type="text" name="keyword" class="input input-bordered">
+                            <input type="hidden" name="isSearchModal" value="true">
                             <input type="submit" value="검색" class="btn">
                         </form>
                     </div>
@@ -204,6 +206,12 @@
             if (confirm("삭제하시겠습니까?")) {
                 form.submit();
             }
+        }
+    </script>
+    <script>
+        const isSearchModal = document.querySelector("#isSearchModal").value;
+        if(JSON.parse(isSearchModal)) {
+            searchModal.showModal();
         }
     </script>
 </div>
