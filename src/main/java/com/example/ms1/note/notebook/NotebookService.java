@@ -43,4 +43,9 @@ public class NotebookService {
         target.setParent(destination);
         notebookRepository.save(target);
     }
+
+    public List<Notebook> getSearchedNotebookList(String keyword) {
+        return notebookRepository.findByNameContaining(keyword);
+
+    }
 }

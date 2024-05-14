@@ -50,7 +50,10 @@
      th:with="notebookList=${mainDataDto.notebookList},
         noteList=${mainDataDto.noteList},
         targetNotebook=${mainDataDto.targetNotebook},
-        targetNote=${mainDataDto.targetNote}">
+        targetNote=${mainDataDto.targetNote},
+        searchedNotebookList=${mainDataDto.searchedNotebookList},
+        searchedNoteList=${mainDataDto.searchedNoteList}
+">
     <div class="bg-blue-300">
         <a href="/">logo</a>
     </div>
@@ -95,6 +98,33 @@
                     </div>
                 </div>
             </dialog>
+
+            <button class="btn" onclick="searchModal.showModal()">검색</button>
+            <dialog id="searchModal" class="modal modal-bottom sm:modal-middle">
+                <div class="modal-box">
+                    <div>
+                        <form action="/">
+                            <input type="text" name="keyword" class="input">
+                            <input type="submit" value="검색" class="btn">
+                        </form>
+                    </div>
+                    <ul>
+                        <li th:each="notebook : ${searchedNotebookList}">
+                            <a href="#" th:text="${notebook.name}"></a>
+                        </li>
+                        <li th:each="note : ${searchedNoteList}">
+                            <a href="#" th:text="${note.title}"></a>
+                        </li>
+                    </ul>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+
             <dialog id="my_modal_1" class="modal">
                 <div class="modal-box flex flex-col items-center">
                     <form th:action="@{|/books/${targetNotebook.id}/update|}" class="flex" method="post">
