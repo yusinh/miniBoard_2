@@ -20,6 +20,32 @@
     </th:block>
 </li>
 
+<li th:fragment="moveTree(notebookList, targetNotebook)" th:each="notebook : ${notebookList}"
+    th:with="basic='w-[90%] p-[10px]'">
+    <th:block th:if="${!#lists.isEmpty(notebook.children)}">
+        <details open th:if="${notebook.id != targetNotebook.id and !#lists.contains(targetNotebook.children, notebook)}">
+            <summary class="flex p-0">
+                <input type="radio" name="moveTarget">
+                <a th:class="${basic}"
+                                         th:classappend="${notebook.id == targetNotebook.id} ? 'bg-blue-600':''"
+                                         href="javascript:void(0)"
+                                         th:text="${notebook.name}"></a>
+            </summary>
+            <ul>
+                <li th:replace="main::moveTree(${notebook.children}, ${targetNotebook})"></li>
+            </ul>
+        </details>
+    </th:block>
+    <th:block th:if="${#lists.isEmpty(notebook.children)}">
+        <div th:if="${notebook.id != targetNotebook.id and !#lists.contains(targetNotebook.children, notebook)}" class="flex">
+        <input type="radio" name="moveTarget">
+        <a th:class="${basic}"
+           th:classappend="${notebook.id == targetNotebook.id} ? 'bg-blue-600' : '' "
+           href="javascript:void(0)" th:text="${notebook.name}"></a>
+        </div>
+    </th:block>
+</li>
+
 <div layout:fragment="content"
      th:with="notebookList=${mainDataDto.notebookList},
         noteList=${mainDataDto.noteList},
@@ -49,6 +75,20 @@
             <a href="/signup" class="btn">회원가입</a>
             <a href="/logout" class="btn">로그아웃</a>
 
+            <button class="btn" onclick="my_modal_5.showModal()">노트 이동</button>
+            <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+                <div class="modal-box">
+                    <ul class="menu h-[100%] overflow-scroll">
+                        <li th:replace="main::moveTree(${notebookList}, ${targetNotebook})">
+                    </ul>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
             <dialog id="my_modal_1" class="modal">
                 <div class="modal-box flex flex-col items-center">
                     <form th:action="@{|/books/${targetNotebook.id}/update|}" class="flex" method="post">
