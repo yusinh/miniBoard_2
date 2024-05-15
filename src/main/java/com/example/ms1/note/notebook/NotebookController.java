@@ -20,9 +20,9 @@ public class NotebookController {
     private final MainService mainService;
 
     @PostMapping("/books/write")
-    public String write() {
+    public String write(String keyword) {
         mainService.saveDefaultNotebook();
-        return "redirect:/";
+        return "redirect:/?keyword=%s".formatted(keyword);
 
     }
 
