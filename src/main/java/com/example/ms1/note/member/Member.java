@@ -20,6 +20,4 @@ public class Member {
     private String nickname;
     private String email;
     private LocalDateTime createDate;
-
-
 }
